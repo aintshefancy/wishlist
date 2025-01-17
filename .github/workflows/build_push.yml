@@ -34,9 +34,9 @@ jobs:
         id: tags
         uses: docker/metadata-action@v5
         with:
-          images: aintshefancy/wishlist:latest, ghcr.io/aintshefancy/wishlist:latest
+          images: aintshefancy/wishlist, ghcr.io/aintshefancy/wishlist
           tags: |
-            type=edge,branch=fafo
+            type=latest,branch=fafo
             type=ref,event=tag
 
       - name: Build and Push Web
