@@ -7,5 +7,6 @@ services:
         volumes:
             - ./uploads:/usr/src/app/uploads
             - ./data:/usr/src/app/data
-        env_file:
-            - .env
+        environment:
+            ORIGIN: https://wishlist.shinydiscoballs.dev
+            TOKEN_TIME: 72
