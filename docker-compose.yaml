@@ -1,6 +1,6 @@
 services:
     app:
-        container_name: wishlist-app
+        container_name: wishlist
         image: ghcr.io/aintshefancy/wishlist
         ports:
             - 3280:3280
