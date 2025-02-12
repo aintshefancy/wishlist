@@ -1,6 +1,6 @@
 {
-    auto_https off
-    admin off
+    auto_https on
+    admin on
 }
 
 https://wishlist.shinydiscoballs.dev:3280 {
