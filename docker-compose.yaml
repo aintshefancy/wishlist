@@ -1,6 +1,6 @@
 services:
     app:
-        container_name: wonderful_borg
+        container_name: wishlist-app
         image: ghcr.io/aintshefancy/wishlist
         ports:
             - 3280:3280
