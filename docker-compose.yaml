@@ -1,11 +1,16 @@
 services:
     app:
-        container_name: wishlist-app
-        image: ghcr.io/cmintey/wishlist
+        container_name: wonderful_borg
+        image: ghcr.io/aintshefancy/wishlist
         ports:
             - 3280:3280
         volumes:
             - ./uploads:/usr/src/app/uploads
             - ./data:/usr/src/app/data
-        env_file:
-            - .env
+        environment:
+            ORIGIN: https://wishlist.shinydiscoballs.dev # The URL your users will be connecting to
+            TOKEN_TIME: 72 # hours until signup and password reset tokens expire
+            HEADER_AUTH_ENABLED: true
+            HEADER_USERNAME: username
+            HEADER_NAME: name
+            HEADER_EMAIL: email
