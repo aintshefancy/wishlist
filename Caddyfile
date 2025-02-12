@@ -1,5 +1,5 @@
 {
-    auto_https on
+    auto_https prefer_wildcard
     admin on
 }
 
