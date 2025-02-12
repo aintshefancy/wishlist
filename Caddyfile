@@ -3,7 +3,7 @@
     admin off
 }
 
-:3280 {
+https://wishlist.shinydiscoballs.dev:3280 {
     @static {
 		file
 		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
@@ -26,7 +26,7 @@
         gzip
     }
 
-    reverse_proxy wishlist-proxy:3000 {
+    reverse_proxy wishlist_pod:3000 {
         flush_interval -1
     }
 }
