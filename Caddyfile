@@ -1,9 +1,8 @@
 {
-    auto_https prefer_wildcard
     admin on
 }
 
-https://wishlist.shinydiscoballs.dev:3280 {
+:3280 {
     @static {
 		file
 		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
@@ -26,7 +25,7 @@ https://wishlist.shinydiscoballs.dev:3280 {
         gzip
     }
 
-    reverse_proxy wishlist-proxy:3280 {
+    reverse_proxy :3000 {
         flush_interval -1
     }
 }
