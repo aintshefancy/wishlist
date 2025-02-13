@@ -9,3 +9,10 @@ services:
             - ./data:/usr/src/app/data
         env_file:
             - shinyenv.env
+    cloudflared:
+        container_name: wishlist-proxy
+        image: docker.io/cloudflare/cloudflared:latest
+        command: tunnel --no-autoupdate run --token
+        environment: TUNNEL_TOKEN=${TUNNEL_TOKEN}
+        depends_on:
+            - app
