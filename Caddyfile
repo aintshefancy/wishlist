@@ -26,7 +26,7 @@ https://wishlist.shinydiscoballs.dev:3280 {
         gzip
     }
 
-    reverse_proxy wishlist_pod:3280 {
+    reverse_proxy wishlist-proxy:3280 {
         flush_interval -1
     }
 }
