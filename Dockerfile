@@ -31,6 +31,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends caddy \
     && rm -rf /var/lib/apt/lists/*
 
+FROM cloudflare/cloudflared:latest
+
+WORKDIR /usr/src/app
+
 RUN cloudflare/cloudflared:latest
 
 COPY --from=build /usr/src/app/build ./build/
