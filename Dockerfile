@@ -1,11 +1,14 @@
 # Stage 1: Build stage
-FROM node:lts AS build
+FROM node:lts-slim AS build
 
 WORKDIR /usr/src/app
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential python3 openssl git bash \
     && rm -rf /var/lib/apt/lists/*
+
+# Add this step to verify the presence of /bin/sh
+RUN [ "/bin/bash", "-c", "ls -l /bin/sh" ]
 
 COPY ./ .
 RUN npm i -g pnpm@latest-9
@@ -15,7 +18,7 @@ RUN pnpm run build
 RUN pnpm prune --prod
 
 # Stage 2: Application stage
-FROM node:lts AS app
+FROM node:lts-slim AS app
 
 ENV NODE_ENV=production
 ENV BODY_SIZE_LIMIT=5000000
@@ -52,4 +55,5 @@ VOLUME /usr/src/app/data
 ENV DEFAULT_CURRENCY=USD
 ENV TOKEN_TIME=72
 
+# Use /bin/bash explicitly
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
