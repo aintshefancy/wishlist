@@ -21,9 +21,6 @@ fi
 # Start Caddy
 caddy start --config /etc/caddy/Caddyfile
 
-# connect to cloudflared tunnel
-cloudflared tunnel run --token "$TUNNEL_TOKEN" --no-autoupdate
-
 # Run Prisma commands
 pnpm prisma migrate deploy
 pnpm prisma db seed
