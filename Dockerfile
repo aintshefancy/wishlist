@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM node:lts-slim AS build
+FROM node:lts AS build
 
 WORKDIR /usr/src/app
 
@@ -15,7 +15,7 @@ RUN pnpm run build
 RUN pnpm prune --prod
 
 # Stage 2: Application stage
-FROM node:lts-slim AS app
+FROM node:lts AS app
 
 ENV NODE_ENV=production
 ENV BODY_SIZE_LIMIT=5000000
