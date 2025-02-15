@@ -31,6 +31,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends caddy \
     && rm -rf /var/lib/apt/lists/*
 
+RUN cloudflare/cloudflared:latest
+
 COPY --from=build /usr/src/app/build ./build/
 COPY --from=build /usr/src/app/node_modules ./node_modules/
 COPY ["package.json", "pnpm-lock.yaml", "entrypoint.sh", "Caddyfile", "./"]
