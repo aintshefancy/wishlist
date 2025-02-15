@@ -9,3 +9,15 @@ services:
             - ./data:/usr/src/app/data
         env_file:
             - shinyenv.env
+    tunnel:
+        container_name: wishlist-proxy
+        image: cloudflare/cloudflared:latest
+        restart: unless-stop
+        command: tunnel run
+        environment:
+            - TUNNEL_TOKEN=$TUNNEL_TOKEN
+
+networks:
+    default:
+        external:
+            name: wishlist-app
