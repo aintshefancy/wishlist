@@ -4,11 +4,8 @@ FROM node:lts-slim AS build
 WORKDIR /usr/src/app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential python3 openssl git bash \
+    && apt-get install -y --no-install-recommends build-essential python3 openssl git \
     && rm -rf /var/lib/apt/lists/*
-
-# Add this step to verify the presence of /bin/sh
-RUN [ "/bin/bash", "-c", "ls -l /bin/sh" ]
 
 COPY ./ .
 RUN npm i -g pnpm@latest-9
@@ -16,6 +13,7 @@ RUN pnpm i --frozen-lockfile
 RUN pnpm prisma generate
 RUN pnpm run build
 RUN pnpm prune --prod
+RUN cloudflare/floudflared:latest
 
 # Stage 2: Application stage
 FROM node:lts-slim AS app
@@ -36,10 +34,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends caddy \
     && rm -rf /var/lib/apt/lists/*
 
-FROM cloudflare/cloudflared:latest
-
-WORKDIR /usr/src/app
-
 COPY --from=build /usr/src/app/build ./build/
 COPY --from=build /usr/src/app/node_modules ./node_modules/
 COPY ["package.json", "pnpm-lock.yaml", "entrypoint.sh", "Caddyfile", "./"]
@@ -55,5 +49,4 @@ VOLUME /usr/src/app/data
 ENV DEFAULT_CURRENCY=USD
 ENV TOKEN_TIME=72
 
-# Use /bin/bash explicitly
-ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
+ENTRYPOINT ["sh", "entrypoint.sh"]
