@@ -13,9 +13,7 @@ RUN pnpm i --frozen-lockfile
 RUN pnpm prisma generate
 RUN pnpm run build
 RUN pnpm prune --prod
-RUN cloudflare/floudflared:latest
 
-# Stage 2: Application stage
 FROM node:lts-slim AS app
 
 ENV NODE_ENV=production
