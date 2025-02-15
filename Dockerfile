@@ -35,6 +35,9 @@ FROM cloudflare/cloudflared:latest
 
 WORKDIR /usr/src/app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends
+
 COPY --from=build /usr/src/app/build ./build/
 COPY --from=build /usr/src/app/node_modules ./node_modules/
 COPY ["package.json", "pnpm-lock.yaml", "entrypoint.sh", "Caddyfile", "./"]
