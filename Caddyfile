@@ -25,7 +25,7 @@
         gzip
     }
 
-    reverse_proxy wishlist-proxy:3000 {
+    reverse_proxy wishlist-app:3000 {
         flush_interval -1
     }
 }
